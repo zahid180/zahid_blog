@@ -57,7 +57,30 @@ class blog{
 
 
 
+//showing all information in admin manage page
+public function show_all_info(){
+  $sql="SELECT*FROM add_blog_info ORDER BY blog_id DESC";
+  if (mysqli_query($this->db_conn,$sql)) {
+     $query_result=mysqli_query($this->db_conn,$sql);
+     return $query_result;
+  }else {
+    die("Query Problem" .mysqli_connect_error($this->db_conn));
+  }
+}
 
+
+
+
+
+// show for edit database information
+public function show_for_edit($data){
+  $sql="SELECT*FROM add_blog_info WHERE blog_id=$data";
+  if (mysqli_query($this->db_conn,$sql)) {
+    $query_result=mysqli_query($this->db_conn,$sql);
+    return $query_result;
+  }
+
+}
 
 }
  ?>

@@ -72,7 +72,7 @@ if (isset($_GET['logout'])) {
           </div>
           <div class="col-md-6 p-5">
             <button  type="button" class="btn btn-dark" name="button">
-              <a href="#">Mannage Blog Info</a>
+              <a href="manage_blog.php">Mannage Blog Info</a>
             </button>
           </div>
         </div>
