@@ -2,6 +2,12 @@
 require_once '../class/blog_class.php';
 $show_all=new blog();
 $query_result=$show_all->show_all_info();
+
+if (isset($_GET['delete'])) {
+  require_once '../class/blog_class.php';
+  $delete=new blog();
+  $delete->delete_blog_info($_GET['delete']);
+}
  ?>
 
 <!DOCTYPE html>
@@ -47,10 +53,9 @@ $query_result=$show_all->show_all_info();
                   <button type="button" name="button" class="btn btn-warning">
                     <a href="blog_edit.php?id=<?php echo $final_query_result['blog_id']; ?>">Edit</a>
                   </button>
-                  <button type="button" name="button" class="btn btn-warning">
-                    <a href="#">Delete</a>
+                  <button type="button" name="delete" class="btn btn-warning">
+                    <a href="?delete=<?php echo $final_query_result['blog_id']; ?>" onclick="return confirm('Are you sure you want to Remove?');">Delete</a>
                   </button>
-
                 </td>
               </tr>
             <?php } ?>

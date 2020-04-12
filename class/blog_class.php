@@ -87,43 +87,60 @@ public function show_for_edit($data){
 
 // update infomation on database
 public function update_blog_info($data){
-  $tem_img= $_FILES['blog_image']['tmp_name'];
-  $img_name=$_FILES['blog_image']['name'];
-  $derectory="blog_image/";
-  $image_url=$derectory.$img_name;
-  $image_size=$_FILES['blog_image']['size'];
-  $image_type=pathinfo($img_name .PATHINFO_EXTENSION); //type chack
-  $img_re_type=$image_type['extension'];
-  $check=getimagesize($tem_img);   // check image
-  if ($check) {
-    if (file_exists($image_url)) {
-      die("Image All ready Exists");
-    }else {
-      if ($image_size < 500000) {
-        if ($img_re_type='jpg4' && $img_re_type= 'png') {
-          move_uploaded_file($tem_img,$image_url);
-          $sql="UPDATE add_blog_info SET author_name='$data[author_name]', blog_title='$data[blog_title]', blog_description='$data[blog_description]', blog_status='$data[blog_status]', blog_image='$image_url' WHERE blog_id='$data[blog_id]'";
-          if (mysqli_query($this->db_conn,$sql)) {
-            $massage= "Blog Information Update Successfully";
-            return $massage;
+  if ($_FILES['blog_image']['name']) {
+    $tem_img= $_FILES['blog_image']['tmp_name'];
+    $img_name=$_FILES['blog_image']['name'];
+    $derectory="blog_image/";
+    $image_url=$derectory.$img_name;
+    $image_size=$_FILES['blog_image']['size'];
+    $image_type=pathinfo($img_name .PATHINFO_EXTENSION); //type chack
+    $img_re_type=$image_type['extension'];
+    $check=getimagesize($tem_img);   // check image
+    if ($check) {
+      if (file_exists($image_url)) {
+        die("Image All ready Exists");
+      }else {
+        if ($image_size < 500000) {
+          if ($img_re_type='jpg4' && $img_re_type= 'png') {
+            move_uploaded_file($tem_img,$image_url);
+            $sql="UPDATE add_blog_info SET author_name='$data[author_name]', blog_title='$data[blog_title]', blog_description='$data[blog_description]', blog_status='$data[blog_status]', blog_image='$image_url' WHERE blog_id='$data[blog_id]'";
+            if (mysqli_query($this->db_conn,$sql)) {
+              $massage= "Blog Information Update Successfully";
+              return $massage;
+            }else {
+              die("Query Porblem" .mysqli_connect_error($this->db_conn));
+            }
           }else {
-            die("Query Porblem" .mysqli_connect_error($this->db_conn));
+            die("Your file type is not jpg or png");
           }
         }else {
-          die("Your file type is not jpg or png");
+          die("Your File Too Large");
         }
-      }else {
-        die("Your File Too Large");
       }
+    }else {
+      die("Your uploaded file is not an image please upload a image");
     }
   }else {
-    die("Your uploaded file is not an image please upload a image");
+    $sql="UPDATE add_blog_info SET author_name='$data[author_name]', blog_title='$data[blog_title]', blog_description='$data[blog_description]', blog_status='$data[blog_status]' WHERE blog_id='$data[blog_id]'";
+    if (mysqli_query($this->db_conn,$sql)) {
+      $massage= "Blog Information Update Successfully";
+      return $massage;
   }
 }
 
 
+}
 
 
+//delete Information
+public function delete_blog_info($data){
+  $sql="DELETE FROM add_blog_info WHERE blog_id=$data";
+  if (mysqli_query($this->db_conn,$sql)) {
+    header("Location:manage_blog.php");
+  }else {
+    die("query Problem" .mysqli_connect_error($this->db_conn));
+  }
+}
 
 
 }
