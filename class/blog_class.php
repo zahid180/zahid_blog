@@ -88,6 +88,11 @@ public function show_for_edit($data){
 // update infomation on database
 public function update_blog_info($data){
   if ($_FILES['blog_image']['name']) {
+    $blog_id=$data[blog_id];
+    $query_result=mysqli_query($this->db_conn,"SELECT blog_image FROM add_blog_info WHERE blog_id='$blog_id'");
+    $blog_image=mysqli_fetch_assoc($query_result);
+    unlink($blog_image['blog_image']);   // unlink function delete file photo and data
+
     $tem_img= $_FILES['blog_image']['tmp_name'];
     $img_name=$_FILES['blog_image']['name'];
     $derectory="blog_image/";
@@ -100,13 +105,12 @@ public function update_blog_info($data){
       if (file_exists($image_url)) {
         die("Image All ready Exists");
       }else {
-        if ($image_size < 500000) {
+        if ($image_size < 5000000) {
           if ($img_re_type='jpg4' && $img_re_type= 'png') {
             move_uploaded_file($tem_img,$image_url);
             $sql="UPDATE add_blog_info SET author_name='$data[author_name]', blog_title='$data[blog_title]', blog_description='$data[blog_description]', blog_status='$data[blog_status]', blog_image='$image_url' WHERE blog_id='$data[blog_id]'";
             if (mysqli_query($this->db_conn,$sql)) {
-              $massage= "Blog Information Update Successfully";
-              return $massage;
+              header("Location: manage_blog.php");
             }else {
               die("Query Porblem" .mysqli_connect_error($this->db_conn));
             }

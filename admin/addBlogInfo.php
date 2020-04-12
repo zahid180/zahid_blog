@@ -18,11 +18,26 @@ if (isset($_POST['zahid'])) {
 
 </head>
 <body>
-  <div class="container pt-5">
-    <button type="button" class="btn btn-primary">
-      <a href="admin_dasebord.php" style="color: #fff; text-decoration: none;">Back To DaseBord</a>
-    </button>
-  </div>
+  <!-- main contain start -->
+  <section class="pt-4 pb-3 adminDasebordBackground">
+    <div class="container-fluid">
+      <div align="middle">
+        <div class="row">
+          <div class="col-md-6 p-5">
+            <button  type="button" class="btn btn-dark" name="button">
+              <a href="manage_blog.php">Manage Blog INformation</a>
+            </button>
+          </div>
+          <div class="col-md-6 p-5">
+            <button  type="button" class="btn btn-dark" name="button">
+              <a href="admin_dasebord.php">Back To Dasebord</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- main contain end -->
 
 
 
