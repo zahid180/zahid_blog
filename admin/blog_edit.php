@@ -1,10 +1,20 @@
 <?php
-
+//show information
 $blog_id=$_GET['id'];
     require_once '../class/blog_class.php';
     $show_for=new blog();
     $query_result=$show_for->show_for_edit($blog_id);
     $final_query_result=mysqli_fetch_assoc($query_result);
+
+    //update Information
+    $massage="";
+    if (isset($_POST['zahid'])) {
+      require_once '../class/blog_class.php';
+      $update=new blog();
+      $massage=$update->update_blog_info($_POST);
+    }
+
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,12 +38,14 @@ $blog_id=$_GET['id'];
   <section class="p-5 bg bg-success m-5">
     <div class="container">
       <div class="row">
+        <h3><?php echo $massage; ?></h3>
         <div class="col-md-12 col-lg-12">
 
           <form action="" method="post" enctype="multipart/form-data">
             <div class="form-group">
               <label for="exampleInputEmail1">Author Name </label>
               <input type="text" name="author_name" value="<?php echo $final_query_result['author_name']; ?>" class="form-control">
+              <input type="hidden" name="blog_id" value="<?php echo $final_query_result['blog_id']; ?>" class="form-control">
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Blog Title </label>
