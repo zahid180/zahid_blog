@@ -16,6 +16,14 @@ if (isset($_POST['zahid'])) {
   <title>Add Blog Information</title>
   <link rel="stylesheet" href="../rec/css/bootstrap.css">
 
+  <style>
+   .adminDasebordBackground{
+     background-image: url(../rec/img/img01.jpg);
+     background-position: fixed;
+     background-repeat: none;
+   }
+  </style>
+
 </head>
 <body>
   <!-- main contain start -->

@@ -28,7 +28,6 @@ if (isset($_GET['logout'])) {
    background-image: url(../rec/img/img01.jpg);
    background-position: fixed;
    background-repeat: none;
-
  }
 </style>
 </head>

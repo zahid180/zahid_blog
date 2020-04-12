@@ -31,12 +31,12 @@ class blog{
       if (file_exists($image_url)) {
         die("Image All ready Exists");
       }else {
-        if ($image_size < 500000) {
+        if ($image_size < 50000000) {
           if ($img_re_type='jpg4' && $img_re_type= 'png') {
-            move_uploaded_file($tem_img,$image_url);
             $sql="INSERT INTO add_blog_info (author_name,blog_title,blog_description,blog_status,blog_image)
             VALUEs ('$data[author_name]','$data[blog_title]','$data[blog_description]','$data[blog_status]','$image_url')";
             if (mysqli_query($this->db_conn,$sql)) {
+              move_uploaded_file($tem_img,$image_url);
               $massage= "Blog Information Save Successfully";
               return $massage;
             }else {

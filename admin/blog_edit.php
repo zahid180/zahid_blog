@@ -24,14 +24,35 @@ $blog_id=$_GET['id'];
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Add Blog Information</title>
   <link rel="stylesheet" href="../rec/css/bootstrap.css">
-
+  <style>
+   .adminDasebordBackground{
+     background-image: url(../rec/img/img01.jpg);
+     background-position: fixed;
+     background-repeat: none;
+   }
+  </style>
 </head>
 <body>
-  <div class="container pt-5">
-    <button type="button" class="btn btn-primary">
-      <a href="admin_dasebord.php" style="color: #fff; text-decoration: none;">Back To DaseBord</a>
-    </button>
-  </div>
+  <!-- main contain start -->
+  <section class="pt-4 pb-3 adminDasebordBackground">
+    <div class="container-fluid">
+      <div align="middle">
+        <div class="row">
+          <div class="col-md-6 p-5">
+            <button  type="button" class="btn btn-dark" name="button">
+              <a href="addBlogInfo.php">Add Blog Info</a>
+            </button>
+          </div>
+          <div class="col-md-6 p-5">
+            <button  type="button" class="btn btn-dark" name="button">
+              <a href="manage_blog.php">Mannage Blog Info</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- main contain end -->
 
 
 
